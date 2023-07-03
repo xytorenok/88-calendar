@@ -1,12 +1,29 @@
 const dayList = document.getElementById('calendar')
+const tasksList = document.querySelector('.tasks-list')
+
 const [prevBtn, nextBtn] = dayList.nextElementSibling.children
 let dates
-let tasks = []
+let tasks = [{
+  date: "2023-07-03",
+  description: "Зробити зачистку", endtime: "15:20", goal: "goal", starttime: "15:00", title: "Зробити зачистку"
+}, {
+  date: "2023-07-03",
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "goal", starttime: "13:00", title: "Де мій кіт ?"
+},{
+  date: "2023-07-03",
+  description: "Купити їжи", endtime: "16:20", goal: "goal", starttime: "16:00", title: "Купити їжи"
+}, {
+  date: "2023-07-03",
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+}, {
+  date: "2023-07-04",
+  description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти"
+}]
 
 dayList.innerHTML = ''
-
+tasksList.innerHTML = ''
 showCalendar()
-showDayTask()
+showDayTasks()
 
 dayList.onclick = e => {
   const li = e.target.closest('li')
@@ -16,7 +33,8 @@ dayList.onclick = e => {
   dayList.querySelector('.active').classList.remove('active')
 
   li.classList.add('active')
-  showDayTask()
+  clearDayTasks()
+  showDayTasks(li.dataset.date)
 }
 
 prevBtn.onclick = showPrevWeek
@@ -85,6 +103,7 @@ function showCalendar() {
 
   dayList.append(...dayItems)
   current.classList.add('active', 'today')
+  showDayTasks(current.dataset.date)
 }
 
 function getMonday(date) {
@@ -157,6 +176,36 @@ function saveTask() {
   addTask.hidden = false
 }
 
-function showDayTask(){
-  
+tasksList.onclick = e => {
+  const li = e.target.closest('li')
+
+  if (!li) return
+
+  li.classList.toggle('active')
+}
+
+
+function showDayTasks(date) {
+  const dayTasks = tasks.filter(task => task.date === date)
+  dayTasks.sort((a, b) => a.starttime.localeCompare(b.starttime)); 
+  for (const dayTask of dayTasks) {
+    buildTask(dayTask)
+
+  }
+}
+
+function buildTask(task) {
+  const li = document.createElement("li");
+  li.classList.add('task-item')
+  li.innerHTML = `<span class="task-time-left">${task.starttime}</span>
+  <div class="task-information">
+    <span class="task-title">${task.title}</span>
+    <span class="task-description">${task.description}</span>
+    <span class="task-time">${task.starttime}-${task.endtime}</span>
+  </div>`
+  tasksList.append(li)
+}
+
+function clearDayTasks(){
+  tasksList.innerHTML = ''
 }

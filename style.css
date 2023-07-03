@@ -65,7 +65,7 @@ body {
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.16px;
 }
 
@@ -73,7 +73,7 @@ body {
   text-align: center;
   font-size: 10px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.1px;
   opacity: 0.5;
 }
@@ -105,11 +105,13 @@ body {
   padding: 25px 20px;
   max-width: var(--width);
   margin: 0 auto;
+  overflow: auto;
 }
 
 .task-item {
   display: flex;
   margin-bottom: 15px;
+  min-height: 52px;
 }
 
 .task-information {
@@ -129,11 +131,17 @@ body {
 }
 
 .task-item.active .task-title,
-.task-item.active .task-time {
+.task-item.active .task-time,
+.task-item.active .task-description {
   color: var(--white-color, #F8F6FF);
+  display: block;
 }
 
-.task-item.done .task-information{
+.task-item.active .task-title{
+  display: none;
+}
+
+.task-item.done .task-information {
   background-color: rgba(168, 252, 42, 0.498);
 }
 
@@ -147,7 +155,7 @@ body {
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.14px;
   opacity: 0.5;
   margin-right: 10px;
@@ -159,7 +167,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.14px;
   max-width: 280px;
 }
@@ -171,10 +179,23 @@ body {
   font-family: Poppins;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.1px;
   opacity: 0.5;
   margin-top: 8px;
+}
+
+.task-description {
+  display: none;
+  color: var(--black, #363942);
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.14px;
+  max-width: 280px;
+  /* margin-top: 10px; */
 }
 
 .navigation {
@@ -268,7 +289,7 @@ body {
   color: #000;
   font-size: 12px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.12px;
   opacity: 0.5;
 }
@@ -277,7 +298,7 @@ body {
   color: var(--black, #363942);
   font-size: 16px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.16px;
   width: 100%;
   background-color: #F5F5F5;
@@ -295,7 +316,7 @@ body {
   color: #000;
   font-size: 12px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0.12px;
   opacity: 0.5;
   margin-bottom: 10px;
