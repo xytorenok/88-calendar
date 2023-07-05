@@ -11,7 +11,7 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-05",
-  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?"
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
 }, {
   id: ++nextId,
   date: "2023-07-05",
@@ -23,6 +23,58 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-06",
+  description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
   description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти"
 }]
 
@@ -156,6 +208,9 @@ function buildDayItem(date) {
 
 
 
+
+
+
 const addTask = document.querySelector('.btn-add')
 const cancelBtn = document.querySelector('.form-cancel')
 
@@ -174,16 +229,23 @@ function closeEditor() {
   menu.classList.remove('open')
   // овключение кнопки доьавления задания
   addTask.hidden = false
+  form.reset()
 }
 
 function createTask() {
   const task = Object.fromEntries(new FormData(form))
   tasks.push(task)
+  task.id = ++nextId
+  task.done = false
   closeEditor()
   form.reset()
+  clearDayTasks()
+
+  dayList.querySelector('.active').classList.remove('active')
+  dayList.querySelector(`li[data-date="${task.date}"]`).classList.add('active')
+  showDayTasks(task.date)
 
 
-  task.id = ++nextId
 }
 
 tasksList.onclick = e => {
@@ -200,6 +262,9 @@ tasksList.onclick = e => {
       li.classList.toggle('done')
       clearTimeout(timerId)
       second = false
+      // почему нужно дублировать єту запись ниже? -----------------------------
+      const id = li.dataset.id
+      changeTaskStatus(+id)
     } else {
       timerId = setTimeout(() => {
         li.classList.toggle('active')
@@ -223,9 +288,9 @@ function showDayTasks(date) {
 
 function buildTask(task) {
   const li = document.createElement("li");
-  li.classList.add('task-item')
-  li.classList.add(`${task.goal}`)
+  li.classList.add('task-item', `${task.goal}`)
   li.dataset.id = task.id
+  if (task.done == true) li.classList.add('done')
   li.innerHTML = `<span class="task-time-left">${task.starttime}</span>
   <div class="task-information">
     <span class="task-title">${task.title}</span>
@@ -258,7 +323,6 @@ function editTask(id) {
   form.querySelector('.form-save').onclick = () => saveTask(task)
 }
 
-
 function saveTask(task) {
   task.title = form.title.value
   task.date = form.date.value
@@ -277,4 +341,15 @@ function saveTask(task) {
   dayList.querySelector('.active').classList.remove('active')
   dayList.querySelector(`li[data-date="${task.date}"]`).classList.add('active')
   showDayTasks(task.date)
+}
+
+function changeTaskStatus(id) {
+  const task = tasks.find(task => task.id === id)
+  if (!task.done == true) {
+    task.done = true
+  } else {
+    task.done = false
+  }
+
+  console.log(task)
 }
