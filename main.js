@@ -2,21 +2,27 @@ const dayList = document.getElementById('calendar')
 const tasksList = document.querySelector('.tasks-list')
 
 const [prevBtn, nextBtn] = dayList.nextElementSibling.children
-let dates
+let dates, second, timerId
+let nextId = 0
 let tasks = [{
-  date: "2023-07-03",
-  description: "Зробити зачистку", endtime: "15:20", goal: "goal", starttime: "15:00", title: "Зробити зачистку"
+  id: ++nextId,
+  date: "2023-07-05",
+  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
 }, {
-  date: "2023-07-03",
-  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "goal", starttime: "13:00", title: "Де мій кіт ?"
-},{
-  date: "2023-07-03",
-  description: "Купити їжи", endtime: "16:20", goal: "goal", starttime: "16:00", title: "Купити їжи"
+  id: ++nextId,
+  date: "2023-07-05",
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?"
 }, {
-  date: "2023-07-03",
+  id: ++nextId,
+  date: "2023-07-05",
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+}, {
+  id: ++nextId,
+  date: "2023-07-05",
   description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
 }, {
-  date: "2023-07-04",
+  id: ++nextId,
+  date: "2023-07-06",
   description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти"
 }]
 
@@ -155,47 +161,60 @@ const cancelBtn = document.querySelector('.form-cancel')
 
 addTask.onclick = openEditor
 cancelBtn.onclick = closeEditor
-form.onsubmit = saveTask
+form.onsubmit = createTask
 
 function openEditor() {
   menu.classList.add('open')
   form.date.value = dayList.querySelector('.day.active').dataset.date
+  // отключение кнопки доьавления задания
   addTask.hidden = true
 }
 
 function closeEditor() {
   menu.classList.remove('open')
+  // овключение кнопки доьавления задания
   addTask.hidden = false
 }
 
-function saveTask() {
+function createTask() {
   const task = Object.fromEntries(new FormData(form))
   tasks.push(task)
   closeEditor()
   form.reset()
-  addTask.hidden = false
+
+
+  task.id = ++nextId
 }
 
 tasksList.onclick = e => {
   const li = e.target.closest('li')
 
-  if (!li) return
-
-  li.classList.toggle('active')
-}
-
-tasksList.ondblclick = e => {
-  const li = e.target.closest('li')
 
   if (!li) return
+  if (e.target.matches('.task-item-edit')) {
+    const id = li.dataset.id
+    editTask(+id)
 
-  li.classList.toggle('done')
+  } else {
+    if (second) {
+      li.classList.toggle('done')
+      clearTimeout(timerId)
+      second = false
+    } else {
+      timerId = setTimeout(() => {
+        li.classList.toggle('active')
+        second = false
+      }, 200)
+
+      second = true
+    }
+  }
+
 }
-
 
 function showDayTasks(date) {
   const dayTasks = tasks.filter(task => task.date === date)
-  dayTasks.sort((a, b) => a.starttime.localeCompare(b.starttime)); 
+  dayTasks.sort((a, b) => a.starttime.localeCompare(b.starttime));
   for (const dayTask of dayTasks) {
     buildTask(dayTask)
 
@@ -205,15 +224,57 @@ function showDayTasks(date) {
 function buildTask(task) {
   const li = document.createElement("li");
   li.classList.add('task-item')
+  li.classList.add(`${task.goal}`)
+  li.dataset.id = task.id
   li.innerHTML = `<span class="task-time-left">${task.starttime}</span>
   <div class="task-information">
     <span class="task-title">${task.title}</span>
     <span class="task-description">${task.description}</span>
     <span class="task-time">${task.starttime}-${task.endtime}</span>
-  </div>`
+  </div>
+  <button class="task-item-edit">✏</button>`
   tasksList.append(li)
 }
 
-function clearDayTasks(){
+function clearDayTasks() {
   tasksList.innerHTML = ''
+}
+
+function editTask(id) {
+  const task = tasks.find(task => task.id === id)
+
+  openEditor()
+  form.querySelector('.form-create').hidden = true
+  form.querySelector('.form-save').hidden = false
+
+  form.title.value = task.title
+  form.description.value = task.description
+  form.goal.value = task.goal
+  form.starttime.value = task.starttime
+  form.endtime.value = task.endtime
+  form.description.value = task.description
+
+
+  form.querySelector('.form-save').onclick = () => saveTask(task)
+}
+
+
+function saveTask(task) {
+  task.title = form.title.value
+  task.date = form.date.value
+  task.description = form.description.value
+  task.goal = form.goal.value
+  task.starttime = form.starttime.value
+  task.endtime = form.endtime.value
+  task.description = form.description.value
+
+
+  form.querySelector('.form-create').hidden = false
+  form.querySelector('.form-save').hidden = true
+  closeEditor()
+  form.reset()
+  clearDayTasks()
+  dayList.querySelector('.active').classList.remove('active')
+  dayList.querySelector(`li[data-date="${task.date}"]`).classList.add('active')
+  showDayTasks(task.date)
 }

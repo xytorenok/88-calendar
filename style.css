@@ -9,7 +9,8 @@
 body,
 button,
 input {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -109,9 +110,23 @@ body {
 }
 
 .task-item {
+  position: relative;
   display: flex;
   margin-bottom: 15px;
   min-height: 52px;
+}
+
+.task-item-edit {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+
+}
+
+:not(.active)>.task-item-edit {
+display: none;
 }
 
 .task-information {
@@ -126,12 +141,28 @@ body {
   overflow: hidden;
 }
 
-.task-item.active .task-information{
-  box-shadow: 3px 3px 16px 0px #7295e0!important;
+.task-item.active .task-information {
+  box-shadow: 3px 3px 16px 0px #7295e0 !important;
 }
 
-.task-item.active .task-information {
-  /* background-color: var(--background); */
+.task-item.goal .task-information {
+  background-color: #dbf30530;
+}
+
+.task-item.body .task-information {
+  background-color: #e6141430;
+}
+
+.task-item.social .task-information {
+  background-color: #3e8cb930;
+}
+
+.task-item.work .task-information {
+  background-color: #b738ca30;
+}
+
+.task-item.common .task-information {
+  background-color: #42615d30;
 }
 
 .task-item.active .task-title,
@@ -141,14 +172,8 @@ body {
   display: block;
 }
 
-.task-item.active .task-title,
-.task-item.active .task-time-left{
-  /* display: none; */
-  color: var(--background);
-}
-
 .task-item.done .task-information {
-  box-shadow: 3px 3px 16px 0px #00ff5150;
+  box-shadow: 3px 3px 16px 0px #00ff5150 !important;
 }
 
 
@@ -358,6 +383,7 @@ body {
 
 #form .topic label:has(+:checked) {
   font-weight: bold;
+  font-size: 17px;
 }
 
 label[for="goal"] {
@@ -369,7 +395,7 @@ label[for="goal"] {
 label[for="body"] {
   width: 50%;
   height: 50px;
-  background-color: #14e66550;
+  background-color: #e6141450;
 }
 
 label[for="social"] {
@@ -401,10 +427,17 @@ label[for="common"] {
   border-radius: 10px 0 0 10px;
 }
 
-.form-save {
+.form-create {
   width: 50%;
   padding: 5px 0;
   background-color: rgba(81, 21, 209, 0.497);
+  border-radius: 0px 10px 10px 0px;
+}
+
+.form-save {
+  width: 50%;
+  padding: 5px 0;
+  background-color: rgba(0, 255, 174, 0.497);
   border-radius: 0px 10px 10px 0px;
 }
 
