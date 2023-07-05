@@ -184,6 +184,14 @@ tasksList.onclick = e => {
   li.classList.toggle('active')
 }
 
+tasksList.ondblclick = e => {
+  const li = e.target.closest('li')
+
+  if (!li) return
+
+  li.classList.toggle('done')
+}
+
 
 function showDayTasks(date) {
   const dayTasks = tasks.filter(task => task.date === date)
