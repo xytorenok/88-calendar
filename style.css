@@ -509,11 +509,62 @@ label[for="common"] {
   opacity: 0.5;
 }
 
-.balance-parts .statistic {
+.balance-parts .statistic-goal {
   position: absolute;
   display: block;
-  top: 50%;
-  left: 50%;
+  top: 85%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  opacity: 0.5;
+}
+
+.balance-parts .planned {
+  position: absolute;
+  display: block;
+  top: 20%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  opacity: 0.5;
+}
+
+.balance-parts .statistic-planned{
+  position: absolute;
+  display: block;
+  top: 29%;
+  left: 23%;
+  transform: translate(-50%, -50%);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  opacity: 0.5;
+}
+
+.balance-parts .done {
+  position: absolute;
+  display: block;
+  top: 42%;
+  left: 23%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  opacity: 0.5;
+}
+
+.balance-parts .statistic-done{
+  position: absolute;
+  display: block;
+  top: 51%;
+  left: 32%;
   transform: translate(-50%, -50%);
   font-weight: 500;
   line-height: 1.2;

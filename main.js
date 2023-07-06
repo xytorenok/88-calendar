@@ -8,7 +8,7 @@ let nextId = 0
 let tasks = [{
   id: ++nextId,
   date: "2023-07-05",
-  description: "Зробити зачистку", endtime: "15:20", goal: "common", starttime: "15:00", title: "Зробити зачистку"
+  description: "Зробити зачистку", endtime: "15:20", goal: "common", starttime: "15:00", title: "Зробити зачистку", done: false
 }, {
   id: ++nextId,
   date: "2023-07-05",
@@ -16,35 +16,19 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-05",
-  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи", done: true
 }, {
   id: ++nextId,
   date: "2023-07-05",
-  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд", done: true
 }, {
   id: ++nextId,
   date: "2023-07-06",
-  description: "Поїграти", endtime: "15:19", goal: "common", starttime: "16:16", title: "Поїграти"
+  description: "Поїграти", endtime: "15:19", goal: "common", starttime: "16:16", title: "Поїграти", done: true
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
-}, {
-  id: ++nextId,
-  date: "2023-07-09",
-  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
-}, {
-  id: ++nextId,
-  date: "2023-07-09",
-  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
-}, {
-  id: ++nextId,
-  date: "2023-07-09",
-  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
-}, {
-  id: ++nextId,
-  date: "2023-07-09",
-  description: "Зробити зачистку", endtime: "15:20", goal: "common", starttime: "15:00", title: "Зробити зачистку"
+  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку", done: true
 }, {
   id: ++nextId,
   date: "2023-07-09",
@@ -52,15 +36,31 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи", done: false
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд", done: false
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Зробити зачистку", endtime: "15:20", goal: "social", starttime: "15:00", title: "Зробити зачистку"
+  description: "Зробити зачистку", endtime: "15:20", goal: "common", starttime: "15:00", title: "Зробити зачистку", done: false
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи", done: false
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд", done: false
+}, {
+  id: ++nextId,
+  date: "2023-07-09",
+  description: "Зробити зачистку", endtime: "15:20", goal: "social", starttime: "15:00", title: "Зробити зачистку", done: false
 }, {
   id: ++nextId,
   date: "2023-07-09",
@@ -68,17 +68,18 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи"
+  description: "Купити їжи", endtime: "16:20", goal: "work", starttime: "16:00", title: "Купити їжи", done: false
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд"
+  description: "Помити посуд", endtime: "19:00", goal: "goal", starttime: "18:00", title: "Помити посуд", done: true
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти"
+  description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти", done: false
 }]
 
+extendDate()
 dayList.innerHTML = ''
 clearDayTasks()
 showCalendar()
@@ -100,6 +101,16 @@ dayList.onclick = e => {
 prevBtn.onclick = showPrevWeek
 nextBtn.onclick = showNextWeek
 
+function extendDate(){
+  Date.prototype.asISODate = function() {
+    const yyyy = this.getFullYear()
+    const mm = (this.getMonth() + 1).toString().padStart(2,0)
+    const dd = this.getDate().toString().padStart(2,0)
+  
+    return `${yyyy}-${mm}-${dd}`
+  }
+}
+
 async function showPrevWeek() {
   await slideRight(...dayList.children)
 
@@ -110,7 +121,7 @@ async function showPrevWeek() {
 
   const dayItems = dates.map(buildDayItem)
   const current = dayItems.find(
-    li => li.dataset.date == date.toISOString().slice(0, 10)
+    li => li.dataset.date == date.asISODate()
   )
 
   dayList.replaceChildren(...dayItems)
@@ -128,7 +139,7 @@ async function showNextWeek() {
 
   const dayItems = dates.map(buildDayItem)
   const current = dayItems.find(
-    li => li.dataset.date == date.toISOString().slice(0, 10)
+    li => li.dataset.date == date.asISODate()
   )
 
   dayList.replaceChildren(...dayItems)
@@ -158,7 +169,7 @@ function showCalendar() {
 
   const dayItems = dates.map(buildDayItem)
   const current = dayItems.find(
-    li => li.dataset.date == date.toISOString().slice(0, 10)
+    li => li.dataset.date == date.asISODate()
   )
 
   dayList.append(...dayItems)
@@ -201,14 +212,14 @@ function buildDayItem(date) {
   p.classList.add('weekday')
   b.classList.add('date')
 
-  li.dataset.date = date.toISOString().slice(0, 10)
+  li.dataset.date = date.asISODate()
   p.innerText = date.toLocaleString('en', { weekday: 'short' })
   b.innerText = date.getDate()
 
   li.append(p, b)
 
   // console.log(date)
-  // console.log(date.toISOString().slice(0, 10))
+  // console.log(date.asISODate())
   // console.log(date.toLocaleString())
 
   return li
@@ -363,47 +374,64 @@ function changeTaskStatus(id) {
   console.log(task)
 }
 
-const goalStatistic = mainpage.querySelector('.b-parts-1 .statistic')
-const bodyStatistic = mainpage.querySelector('.b-parts-2 .statistic')
-const socialStatistic = mainpage.querySelector('.b-parts-3 .statistic')
-const workStatistic = mainpage.querySelector('.b-parts-4 .statistic')
+const goalStatistic = mainpage.querySelector('.b-parts-1 .statistic-goal')
+const bodyStatistic = mainpage.querySelector('.b-parts-2 .statistic-goal')
+const socialStatistic = mainpage.querySelector('.b-parts-3 .statistic-goal')
+const workStatistic = mainpage.querySelector('.b-parts-4 .statistic-goal')
+
+const goalStatisticPlanned = mainpage.querySelector('.b-parts-1 .statistic-planned')
+const bodyStatisticPlanned = mainpage.querySelector('.b-parts-2 .statistic-planned')
+const socialStatisticPlanned = mainpage.querySelector('.b-parts-3 .statistic-planned')
+const workStatisticPlanned = mainpage.querySelector('.b-parts-4 .statistic-planned')
+
+const goalStatisticDone = mainpage.querySelector('.b-parts-1 .statistic-done')
+const bodyStatisticDone = mainpage.querySelector('.b-parts-2 .statistic-done')
+const socialStatisticDone = mainpage.querySelector('.b-parts-3 .statistic-done')
+const workStatisticDone = mainpage.querySelector('.b-parts-4 .statistic-done')
 
 mainBtn.onclick = () => {
   pages.forEach((page)=> page.classList.remove('open'))
   mainpage.classList.toggle('open')
   addTask.hidden = false
+  
+  countBalance()
 }
 
-countBalance()
 
+countBalance()
 function countBalance(){
   filteredTasks = tasks.filter(task => task.goal !== 'common')
-  console.log(filteredTasks)
-  
-  goalTask = tasks.filter(task => task.goal == 'goal')
-  console.log(goalTask)
-  goalPercent = Math.round(goalTask.length / filteredTasks.length * 100)
-  console.log(goalPercent)
+
+  goalTasks = tasks.filter(task => task.goal == 'goal')
+  goalPercent = Math.round(goalTasks.length / filteredTasks.length * 100)
   goalStatistic.innerText = goalPercent + '%'
+  goalDoneTasks = goalTasks.filter(task => task.done == true)
+  goalStatisticPlanned.innerText = goalTasks.length + ' tasks'
+  goalStatisticDone.innerText = goalDoneTasks.length + ' tasks'
 
-  bodyTask = tasks.filter(task => task.goal == 'body')
-  console.log(bodyTask)
-  bodyPercent = Math.round(bodyTask.length / filteredTasks.length * 100)
-  console.log(bodyPercent)
+
+  bodyTasks = tasks.filter(task => task.goal == 'body')
+  bodyPercent = Math.round(bodyTasks.length / filteredTasks.length * 100)
   bodyStatistic.innerText = bodyPercent + '%'
+  bodyDoneTasks = bodyTasks.filter(task => task.done == true)
+  bodyStatisticPlanned.innerText = bodyTasks.length + ' tasks'
+  bodyStatisticDone.innerText = bodyDoneTasks.length + ' tasks'
 
-  socialTask = tasks.filter(task => task.goal == 'social')
-  console.log(socialTask)
-  socialPercent = Math.round(socialTask.length / filteredTasks.length * 100)
-  console.log(socialPercent)
+
+  socialTasks = tasks.filter(task => task.goal == 'social')
+  socialPercent = Math.round(socialTasks.length / filteredTasks.length * 100)
   socialStatistic.innerText = socialPercent + '%'
+  socialDoneTasks = socialTasks.filter(task => task.done == true)
+  socialStatisticPlanned.innerText = socialTasks.length + ' tasks'
+  socialStatisticDone.innerText = socialDoneTasks.length + ' tasks'
 
-  workTask = tasks.filter(task => task.goal == 'work')
-  console.log(workTask)
-  workPercent = Math.round(workTask.length / filteredTasks.length * 100)
-  console.log(workPercent)
-  workStatistic.innerText = workPercent + '%'
 
+  workTasks = tasks.filter(task => task.goal == 'work')
+  workPercent = Math.round(workTasks.length / filteredTasks.length * 100)
+  workStatistic.innerText = workPercent + '%'   
+  workDoneTasks = workTasks.filter(task => task.done == true)
+  workStatisticPlanned.innerText = workTasks.length + ' tasks'
+  workStatisticDone.innerText = workDoneTasks.length + ' tasks'
 }
 
 calendarBtn.onclick = () =>{
