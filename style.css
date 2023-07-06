@@ -128,7 +128,7 @@ body {
 }
 
 :not(.active)>.task-item-edit {
-display: none;
+  display: none;
 }
 
 .task-information {
@@ -296,7 +296,7 @@ display: none;
   user-select: none;
 }
 
-#menu {
+#editpage {
   width: 100%;
   height: calc(100vh - 65px);
   position: absolute;
@@ -444,6 +444,8 @@ label[for="common"] {
   border-radius: 0px 10px 10px 0px;
 }
 
+/* --------------------main-page---------------- */
+
 #mainpage {
   width: 100%;
   height: calc(100vh - 65px);
@@ -452,9 +454,71 @@ label[for="common"] {
   top: 0;
   transform: translateY(0%);
   transition: 500ms;
-  padding: 60px 7px 0;
+  padding: 60px 7px 70px;
   background-color: #ffffff;
   overflow: auto;
+}
+
+.info-titles {
+  color: var(--black, #363942);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 5px;
+}
+
+.balance-square {
+  display: flex;
+  flex-wrap: wrap;
+  height: 380px;
+}
+
+.balance-parts {
+  width: 50%;
+  height: 50%;
+  position: relative;
+}
+
+.b-parts-1 {
+  background-color: #dbf30550;
+}
+
+.b-parts-2 {
+  background-color: #e6141450;
+}
+
+.b-parts-3 {
+  background-color: #3e8cb950;
+}
+
+.b-parts-4 {
+  background-color: #b738ca50;
+}
+
+.balance-parts .goal {
+  position: absolute;
+  display: block;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  opacity: 0.5;
+}
+
+.balance-parts .statistic {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  opacity: 0.5;
 }
 
 @keyframes fade-in {

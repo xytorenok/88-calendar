@@ -52,13 +52,14 @@
     <button class="btn">next weeknext</button>
   </div>
   <div class="line"></div>
-  <ul class="tasks-list" >
+  <ul class="tasks-list">
     <li class="task-item">
       <span class="task-time-left">18:00</span>
       <div class="task-information">
         <span class="task-title">Купити їжи</span>
         <span class="task-time">18:00-19:00</span>
-        <span class="task-description">Купити їжи, доїсти все до кінця, а потім набрати знайомого та рассказати йому історію</span>
+        <span class="task-description">Купити їжи, доїсти все до кінця, а потім набрати знайомого та рассказати йому
+          історію</span>
       </div>
       <button class="task-item-edit">edit</button>
     </li>
@@ -82,23 +83,23 @@
     <button class="btn-add"><img src="img/plus.svg" alt=""></button>
     <ul class="footer-list">
       <li class="footer-item">
-        <a href="" class="footer-link">
+        <button class="footer-link" id="mainBtn">
           <img src="img/footer-home.svg" alt="">
-        </a>
-        <a href="" class="footer-link">
+        </button>
+        <button class="footer-link" id="calendarBtn">
           <img src="img/footer-calendar.svg" alt="">
-        </a>
+        </button>
       </li>
       <li class="footer-item">
-        <a href="" class="footer-link">
+        <button class="footer-link">
           <img src="img/footer-notebook.svg" alt="">
-        </a>
-        <a href="" class="footer-link">
+        </button>
+        <button class="footer-link">
           <img src="img/footer-person.svg" alt="">
-        </a>
+        </button>
       </li>
     </ul>
-    <div id="menu" class="">
+    <div id="editpage" class="pages">
       <form action="javascript:" id="form">
         <label for="title">Title</label>
         <input type="text" name="title" id="title" placeholder="Task name" required>
@@ -132,11 +133,33 @@
         <div class="form-buttons">
           <button type='button' class="form-cancel">Cancel</button>
           <button class="form-create">Create</button>
-          <button type='button' class="form-save"hidden>Save</button>
+          <button type='button' class="form-save" hidden>Save</button>
         </div>
       </form>
     </div>
-    <div id="mainpage" class=""></div>
+    <div id="mainpage" class="pages open">
+      <div class="info-balance">
+        <p class="balance-title info-titles">Balance square</p>
+        <div class="balance-square">
+          <div class="balance-parts b-parts-1">
+            <span class="goal">goal</span>
+            <span class="statistic">15%</span>
+          </div>
+          <div class="balance-parts b-parts-2">
+            <span class="goal">body</span>
+            <span class="statistic">20%</span>
+          </div>
+          <div class="balance-parts b-parts-3">
+            <span class="goal">social</span>
+            <span class="statistic">35%</span>
+          </div>
+          <div class="balance-parts b-parts-4">
+            <span class="goal">work</span>
+            <span class="statistic">30%</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
 
 

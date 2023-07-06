@@ -1,5 +1,6 @@
 const dayList = document.getElementById('calendar')
 const tasksList = document.querySelector('.tasks-list')
+const pages = document.querySelectorAll('.pages')
 
 const [prevBtn, nextBtn] = dayList.nextElementSibling.children
 let dates, second, timerId
@@ -7,7 +8,7 @@ let nextId = 0
 let tasks = [{
   id: ++nextId,
   date: "2023-07-05",
-  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
+  description: "Зробити зачистку", endtime: "15:20", goal: "common", starttime: "15:00", title: "Зробити зачистку"
 }, {
   id: ++nextId,
   date: "2023-07-05",
@@ -23,7 +24,7 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-06",
-  description: "Поїграти", endtime: "15:19", goal: "goal", starttime: "16:16", title: "Поїграти"
+  description: "Поїграти", endtime: "15:19", goal: "common", starttime: "16:16", title: "Поїграти"
 }, {
   id: ++nextId,
   date: "2023-07-09",
@@ -43,7 +44,7 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
+  description: "Зробити зачистку", endtime: "15:20", goal: "common", starttime: "15:00", title: "Зробити зачистку"
 }, {
   id: ++nextId,
   date: "2023-07-09",
@@ -59,11 +60,11 @@ let tasks = [{
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Зробити зачистку", endtime: "15:20", goal: "body", starttime: "15:00", title: "Зробити зачистку"
+  description: "Зробити зачистку", endtime: "15:20", goal: "social", starttime: "15:00", title: "Зробити зачистку"
 }, {
   id: ++nextId,
   date: "2023-07-09",
-  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "body", starttime: "13:00", title: "Де мій кіт ?", done: true
+  description: "Знайти кота та почистити йому вуха, щоб кращий був слух", endtime: "14:00", goal: "social", starttime: "13:00", title: "Де мій кіт ?", done: true
 }, {
   id: ++nextId,
   date: "2023-07-09",
@@ -79,7 +80,7 @@ let tasks = [{
 }]
 
 dayList.innerHTML = ''
-tasksList.innerHTML = ''
+clearDayTasks()
 showCalendar()
 showDayTasks()
 
@@ -93,6 +94,7 @@ dayList.onclick = e => {
   li.classList.add('active')
   clearDayTasks()
   showDayTasks(li.dataset.date)
+  console.log(li.dataset.date)
 }
 
 prevBtn.onclick = showPrevWeek
@@ -162,6 +164,8 @@ function showCalendar() {
   dayList.append(...dayItems)
   current.classList.add('active', 'today')
   showDayTasks(current.dataset.date)
+
+  console.log(current.dataset.date)
 }
 
 function getMonday(date) {
@@ -203,6 +207,10 @@ function buildDayItem(date) {
 
   li.append(p, b)
 
+  // console.log(date)
+  // console.log(date.toISOString().slice(0, 10))
+  // console.log(date.toLocaleString())
+
   return li
 }
 
@@ -219,14 +227,15 @@ cancelBtn.onclick = closeEditor
 form.onsubmit = createTask
 
 function openEditor() {
-  menu.classList.add('open')
+  pages.forEach((page)=> page.classList.remove('open'))
+  editpage.classList.add('open')
   form.date.value = dayList.querySelector('.day.active').dataset.date
   // отключение кнопки доьавления задания
   addTask.hidden = true
 }
 
 function closeEditor() {
-  menu.classList.remove('open')
+  editpage.classList.remove('open')
   // овключение кнопки доьавления задания
   addTask.hidden = false
   form.reset()
@@ -352,4 +361,52 @@ function changeTaskStatus(id) {
   }
 
   console.log(task)
+}
+
+const goalStatistic = mainpage.querySelector('.b-parts-1 .statistic')
+const bodyStatistic = mainpage.querySelector('.b-parts-2 .statistic')
+const socialStatistic = mainpage.querySelector('.b-parts-3 .statistic')
+const workStatistic = mainpage.querySelector('.b-parts-4 .statistic')
+
+mainBtn.onclick = () => {
+  pages.forEach((page)=> page.classList.remove('open'))
+  mainpage.classList.toggle('open')
+  addTask.hidden = false
+}
+
+countBalance()
+
+function countBalance(){
+  filteredTasks = tasks.filter(task => task.goal !== 'common')
+  console.log(filteredTasks)
+  
+  goalTask = tasks.filter(task => task.goal == 'goal')
+  console.log(goalTask)
+  goalPercent = Math.round(goalTask.length / filteredTasks.length * 100)
+  console.log(goalPercent)
+  goalStatistic.innerText = goalPercent + '%'
+
+  bodyTask = tasks.filter(task => task.goal == 'body')
+  console.log(bodyTask)
+  bodyPercent = Math.round(bodyTask.length / filteredTasks.length * 100)
+  console.log(bodyPercent)
+  bodyStatistic.innerText = bodyPercent + '%'
+
+  socialTask = tasks.filter(task => task.goal == 'social')
+  console.log(socialTask)
+  socialPercent = Math.round(socialTask.length / filteredTasks.length * 100)
+  console.log(socialPercent)
+  socialStatistic.innerText = socialPercent + '%'
+
+  workTask = tasks.filter(task => task.goal == 'work')
+  console.log(workTask)
+  workPercent = Math.round(workTask.length / filteredTasks.length * 100)
+  console.log(workPercent)
+  workStatistic.innerText = workPercent + '%'
+
+}
+
+calendarBtn.onclick = () =>{
+  pages.forEach((page)=> page.classList.remove('open'))
+  addTask.hidden = false
 }
